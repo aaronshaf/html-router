@@ -30,6 +30,16 @@ Drop-in router.
 </hash-switch>
 ```
 
+## Prevent flash of undefined content
+
+```html
+<style>
+*:not(:defined) {
+  visibility: hidden;
+}
+</style>
+```
+
 ## Web components polyfill
 
 ```html
