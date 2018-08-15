@@ -3,6 +3,8 @@
   "description": "Drop-in router",
   "files": [
     "index.js",
+    "pathname.js",
+    "hash.js",
     "vendor/path-to-regexp/index.js"
   ],
   "version": "1.0.1",
