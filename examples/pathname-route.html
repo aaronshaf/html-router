@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <title>html-router</title>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2/webcomponents-loader.js"></script>
+  <style>
+    pathname-route:not(:defined) {
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="../pathname.js" type="module"></script>
+
+  <h1>Standalone pathname routes</h1>
+
+  <ul>
+    <li>
+      <pushstate-link><a href="/">Home</a></pushstate-link>
+    </li>
+    <li>
+      <pushstate-link><a href="/foo">Foo</a></pushstate-link>
+    </li>
+    <li>
+      <pushstate-link><a href="/foo/bar">Foo & Bar</a></pushstate-link>
+    </li>
+    <li>
+      <pushstate-link><a href="/baz">Baz</a></pushstate-link>
+    </li>
+  </ul>
+
+  <pathname-route path="/">
+    <h2>Home</h2>
+  </pathname-route>
+
+  <pathname-route path="/foo(.*)">
+    <h2>Foo</h2>
+  </pathname-route>
+
+  <pathname-route path="/foo/bar">
+    <h2>Bar</h2>
+  </pathname-route>
+</body>
+
+</html>

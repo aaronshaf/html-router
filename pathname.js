@@ -1,4 +1,4 @@
-import { Switch } from "./index.js";
+import { Switch, Route } from "./index.js";
 
 let isPushStatedObserved = false;
 
@@ -78,4 +78,35 @@ class PushStateLink extends HTMLElement {
 if (window.customElements.get("pushstate-link") == null) {
   window.PushStateLink = PushStateLink;
   window.customElements.define("pushstate-link", PushStateLink);
+}
+
+export class PathnameRoute extends Route {
+  constructor() {
+    super();
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.handleStateChange();
+  }
+
+  handleStateChange() {
+    this.updateMatch(location.pathname);
+  }
+
+  connectedCallback() {
+    if (isPushStatedObserved === false) {
+      listenToPushState();
+    }
+
+    window.addEventListener("popstate", this.handleStateChange);
+    window.addEventListener("pushState", this.handleStateChange);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("popstate", this.handleStateChange);
+    window.removeEventListener("pushState", this.handleStateChange);
+  }
+}
+
+if (window.customElements.get("pathname-route") == null) {
+  window.HashRoute = PathnameRoute;
+  window.customElements.define("pathname-route", PathnameRoute);
 }

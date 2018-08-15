@@ -2,7 +2,7 @@
 
 <head>
   <title>html-router</title>
-  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.4/webcomponents-loader.js"></script>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2/webcomponents-loader.js"></script>
   <style>
     pathname-switch:not(:defined) {
       visibility: hidden;
@@ -13,7 +13,12 @@
 <body>
   <script src="../pathname.js" type="module"></script>
 
+  <h1>Match first pathname route</h1>
+
   <ul>
+    <li>
+      <pushstate-link><a href="/">Home</a></pushstate-link>
+    </li>
     <li>
       <pushstate-link><a href="/foo">Foo</a></pushstate-link>
     </li>
@@ -26,16 +31,20 @@
   </ul>
 
   <pathname-switch>
+    <div data-path="/">
+      <h2>Home</h2>
+    </div>
+
     <div data-path="/foo">
-      <h1>Foo</h1>
+      <h2>Foo</h2>
     </div>
 
     <div data-path="/bar">
-      <h1>Bar</h1>
+      <h2>Bar</h2>
     </div>
 
     <div data-path="(.*)">
-      <h1>Not found</h1>
+      <h2>Everything else</h2>
     </div>
   </pathname-switch>
 </body>

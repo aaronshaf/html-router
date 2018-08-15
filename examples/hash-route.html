@@ -1,0 +1,37 @@
+<html>
+
+<head>
+  <title>html-router</title>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2/webcomponents-loader.js"></script>
+  <style>
+    hash-route:not(:defined) {
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="../hash.js" type="module"></script>
+
+  <h1>Standalone hash routes</h1>
+
+  <ul>
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/foo">Foo</a></li>
+    <li><a href="#/foo/bar">Foo and Bar</a></li>
+  </ul>
+
+  <hash-route path="/">
+    <h2>Home</h2>
+  </hash-route>
+
+  <hash-route path="/foo(.*)">
+    <h2>Foo</h2>
+  </hash-route>
+
+  <hash-route path="/foo/bar">
+    <h2>Bar</h2>
+  </hash-route>
+</body>
+
+</html>

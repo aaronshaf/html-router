@@ -86,5 +86,5 @@ pathname-switch:not(:defined) {
 ## Web components polyfill
 
 ```html
-<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.4/webcomponents-loader.js"></script>
+<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2/webcomponents-loader.js"></script>
 ```

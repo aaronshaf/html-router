@@ -23,8 +23,7 @@ export class Switch extends HTMLElement {
 
     routeNodes.forEach(node => {
       const path = node.dataset.path;
-      const keys = [];
-      const re = pathToRegexp(path, keys);
+      const re = pathToRegexp(path);
       const result = re.exec(pathname);
 
       if (result && matchFound === false) {
@@ -34,5 +33,32 @@ export class Switch extends HTMLElement {
         node.removeAttribute("slot");
       }
     });
+  }
+}
+
+export class Route extends HTMLElement {
+  constructor() {
+    super();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    const node = document.createElement("slot");
+    node.setAttribute("name", "unmatched");
+    shadowRoot.appendChild(node);
+    this.updateMatch = this.updateMatch.bind(this);
+  }
+
+  updateMatch(pathname) {
+    if (pathname === "") {
+      pathname = "/";
+    }
+
+    const path = this.getAttribute("path");
+    const re = pathToRegexp(path);
+    const result = re.exec(pathname);
+
+    if (result) {
+      this.shadowRoot.firstChild.removeAttribute("name");
+    } else {
+      this.shadowRoot.firstChild.setAttribute("name", "unmatched");
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 <head>
   <title>html-router</title>
-  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.4/webcomponents-loader.js"></script>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2/webcomponents-loader.js"></script>
   <style>
     hash-switch:not(:defined) {
       visibility: hidden;
@@ -13,6 +13,8 @@
 <body>
   <script src="../hash.js" type="module"></script>
 
+  <h1>Match first hash route</h1>
+
   <ul>
     <li><a href="#/foo">Foo</a></li>
     <li><a href="#/bar">Bar</a></li>
@@ -21,19 +23,19 @@
 
   <hash-switch>
     <div data-path="/">
-      <h1>Home</h1>
+      <h2>Home</h2>
     </div>
 
     <div data-path="/foo">
-      <h1>Foo</h1>
+      <h2>Foo</h2>
     </div>
 
     <div data-path="/bar">
-      <h1>Bar</h1>
+      <h2>Bar</h2>
     </div>
 
     <div data-path="(.*)">
-      <h1>Not found</h1>
+      <h2>Not found</h2>
     </div>
   </hash-switch>
 </body>
