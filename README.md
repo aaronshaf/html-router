@@ -4,6 +4,8 @@ Drop-in router.
 
 ### Hash router
 
+Renders first match.
+
 ```html
 <script src="https://unpkg.com/@aaronshaf/html-router@0/hash.js" type="module"></script>
 ```
@@ -33,6 +35,8 @@ Drop-in router.
 ```
 
 ### Pathname router
+
+Renders first match.
 
 ```html
 <script src="https://unpkg.com/@aaronshaf/html-router@0/pathname.js" type="module"></script>
