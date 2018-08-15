@@ -34,7 +34,7 @@ Drop-in router.
 </hash-switch>
 ```
 
-#### Standalone hash routes
+#### Standalone hash routes ([example](https://aaronshaf.github.io/html-router/examples/hash-route.html))
 
 ```html
 <ul>
@@ -58,7 +58,7 @@ Drop-in router.
 </hash-route>
 ```
 
-### Pathname router
+### Pathname router ([example](https://aaronshaf.github.io/html-router/examples/hash-switch.html))
 
 ```html
 <script src="https://unpkg.com/@aaronshaf/html-router@0/pathname.js" type="module"></script>
@@ -96,7 +96,7 @@ Renders first match.
 </pathname-switch>
 ```
 
-#### Standalone pathname routes
+#### Standalone pathname routes ([example](https://aaronshaf.github.io/html-router/examples/hash-route.html))
 
 ```html
 <ul>
