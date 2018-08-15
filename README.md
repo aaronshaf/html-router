@@ -5,7 +5,7 @@ Drop-in router.
 ### Hash router
 
 ```html
-<script src="https://unpkg.com/@aaronshaf/html-router@0/hash.js" type="module"></script>
+<script src="https://unpkg.com/@aaronshaf/html-router@1/hash.js" type="module"></script>
 ```
 
 #### Render first match ([example](https://aaronshaf.github.io/html-router/examples/hash-switch.html))
@@ -61,7 +61,7 @@ Drop-in router.
 ### Pathname router
 
 ```html
-<script src="https://unpkg.com/@aaronshaf/html-router@0/pathname.js" type="module"></script>
+<script src="https://unpkg.com/@aaronshaf/html-router@1/pathname.js" type="module"></script>
 ```
 
 #### Render first match ([example](https://aaronshaf.github.io/html-router/examples/pathname-switch.html))
