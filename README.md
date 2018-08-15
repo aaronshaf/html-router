@@ -23,6 +23,10 @@ Drop-in router.
   <div data-path="/bar">
     <h1>Bar</h1>
   </div>
+
+  <div data-path="(.*)">
+    <h1>Not found</h1>
+  </div>
 </hash-switch>
 ```
 
