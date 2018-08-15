@@ -55,7 +55,7 @@ export class HashSwitch extends Switch {
   }
 }
 
-if (!window.customElements.get("hash-switch")) {
+if (window.customElements.get("hash-switch") == null) {
   window.HashSwitch = HashSwitch;
   window.customElements.define("hash-switch", HashSwitch);
 }
