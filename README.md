@@ -1,6 +1,6 @@
 Drop-in router.
 
-## Quick start
+## Usage
 
 ### Hash router
 
