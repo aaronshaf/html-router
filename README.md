@@ -3,7 +3,7 @@ Drop-in router.
 ## Quick start
 
 ```html
-<script src="https://unpkg.com/@aaronshaf/html-router@0.0.1/index.js" type="module"></script>
+<script src="https://unpkg.com/@aaronshaf/html-router@0/index.js" type="module"></script>
 ```
 
 ```html
