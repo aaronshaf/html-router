@@ -8,7 +8,7 @@ Drop-in router.
 <script src="https://unpkg.com/@aaronshaf/html-router@0/hash.js" type="module"></script>
 ```
 
-#### Renders first match
+#### Renders first match ([example](https://aaronshaf.github.io/html-router/examples/hash-switch.html))
 
 ```html
 <ul>
