@@ -34,7 +34,7 @@ Drop-in router.
 </hash-switch>
 ```
 
-#### Standalone hash routes ([example](https://aaronshaf.github.io/html-router/examples/hash-route.html))
+#### Standalone routes ([example](https://aaronshaf.github.io/html-router/examples/hash-route.html))
 
 ```html
 <ul>
@@ -96,7 +96,7 @@ Drop-in router.
 </pathname-switch>
 ```
 
-#### Standalone pathname routes ([example](https://aaronshaf.github.io/html-router/examples/pathname-route.html))
+#### Standalone routes ([example](https://aaronshaf.github.io/html-router/examples/pathname-route.html))
 
 ```html
 <ul>
