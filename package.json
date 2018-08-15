@@ -1,0 +1,20 @@
+{
+  "name": "@aaronshaf/html-router",
+  "description": "Drop-in router",
+  "files": [
+    "index.js",
+    "vendor/path-to-regexp/index.js"
+  ],
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronshaf/html-router.git"
+  },
+  "author": "Aaron Shafovaloff <aaronshaf@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aaronshaf/html-router/issues"
+  },
+  "homepage": "https://github.com/aaronshaf/html-router#readme"
+}

@@ -1,0 +1,37 @@
+<html>
+
+<head>
+  <title>html-router</title>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.4/webcomponents-loader.js"></script>
+  <style>
+    *:not(:defined) {
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="../index.js" type="module"></script>
+
+  <ul>
+    <li><a href="#/foo">Foo</a></li>
+    <li><a href="#/bar">Bar</a></li>
+    <li><a href="#/baz">Baz</a></li>
+  </ul>
+
+  <hash-switch>
+    <div data-path="/foo">
+      <h1>Foo</h1>
+    </div>
+
+    <div data-path="/bar">
+      <h1>Bar</h1>
+    </div>
+
+    <div data-path="(.*)">
+      <h1>Not found</h1>
+    </div>
+  </hash-switch>
+</body>
+
+</html>
