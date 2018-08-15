@@ -4,11 +4,11 @@ Drop-in router.
 
 ### Hash router
 
-Renders first match.
-
 ```html
 <script src="https://unpkg.com/@aaronshaf/html-router@0/hash.js" type="module"></script>
 ```
+
+#### Renders first match
 
 ```html
 <ul>
@@ -34,13 +34,37 @@ Renders first match.
 </hash-switch>
 ```
 
-### Pathname router
+#### Standalone hash routes
 
-Renders first match.
+```html
+<ul>
+  <li><a href="#/">Home</a></li>
+  <li><a href="#/foo">Foo</a></li>
+  <li><a href="#/foo/bar">Foo and Bar</a></li>
+</ul>
+```
+
+```html
+<hash-route path="/">
+  <h2>Home</h2>
+</hash-route>
+
+<hash-route path="/foo(.*)">
+  <h2>Foo</h2>
+</hash-route>
+
+<hash-route path="/foo/bar">
+  <h2>Bar</h2>
+</hash-route>
+```
+
+### Pathname router
 
 ```html
 <script src="https://unpkg.com/@aaronshaf/html-router@0/pathname.js" type="module"></script>
 ```
+
+Renders first match.
 
 ```html
 <ul>
@@ -70,6 +94,29 @@ Renders first match.
     <h1>Not found</h1>
   </div>
 </pathname-switch>
+```
+
+#### Standalone pathname routes
+
+```html
+<ul>
+  <li>
+    <pushstate-link><a href="/foo">Foo</a></pushstate-link>
+  </li>
+  <li>
+    <pushstate-link><a href="/foo/bar">Foo & Bar</a></pushstate-link>
+  </li>
+</ul>
+```
+
+```html
+<pathname-route path="/foo(.*)">
+  <h2>Foo</h2>
+</pathname-route>
+
+<pathname-route path="/foo/bar">
+  <h2>Bar</h2>
+</pathname-route>
 ```
 
 ## Prevent flash of undefined content
