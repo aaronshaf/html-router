@@ -3,7 +3,7 @@ import pathToRegexp from "./vendor/path-to-regexp/index.js";
 const isRouteNode = node =>
   node.nodeType === Node.ELEMENT_NODE && node.hasAttribute("data-path");
 
-class Switch extends HTMLElement {
+export class Switch extends HTMLElement {
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open" });
@@ -14,6 +14,9 @@ class Switch extends HTMLElement {
   }
 
   updateMatch(pathname) {
+    if (pathname === "") {
+      pathname = "/";
+    }
     let matchFound = false;
 
     const routeNodes = Array.from(this.childNodes).filter(isRouteNode);
@@ -32,30 +35,4 @@ class Switch extends HTMLElement {
       }
     });
   }
-}
-
-export class HashSwitch extends Switch {
-  constructor() {
-    super();
-    this.handleHashChange = this.handleHashChange.bind(this);
-    this.handleHashChange();
-  }
-
-  handleHashChange() {
-    const path = location.hash.slice(1);
-    this.updateMatch(path);
-  }
-
-  connectedCallback() {
-    window.addEventListener("hashchange", this.handleHashChange);
-  }
-
-  disconnectedCallback() {
-    window.removeEventListener("hashchange", this.handleHashChange);
-  }
-}
-
-if (window.customElements.get("hash-switch") == null) {
-  window.HashSwitch = HashSwitch;
-  window.customElements.define("hash-switch", HashSwitch);
 }

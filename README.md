@@ -2,8 +2,10 @@ Drop-in router.
 
 ## Quick start
 
+### Hash router
+
 ```html
-<script src="https://unpkg.com/@aaronshaf/html-router@0/index.js" type="module"></script>
+<script src="https://unpkg.com/@aaronshaf/html-router@0/hash.js" type="module"></script>
 ```
 
 ```html
@@ -30,11 +32,48 @@ Drop-in router.
 </hash-switch>
 ```
 
+### Pathname router
+
+```html
+<script src="https://unpkg.com/@aaronshaf/html-router@0/pathname.js" type="module"></script>
+```
+
+```html
+<ul>
+  <li>
+    <pushstate-link><a href="/foo">Foo</a></pushstate-link>
+  </li>
+  <li>
+    <pushstate-link><a href="/bar">Bar</a></pushstate-link>
+  </li>
+  <li>
+    <pushstate-link><a href="/baz">Baz</a></pushstate-link>
+  </li>
+</ul>
+```
+
+```html
+<pathname-switch>
+  <div data-path="/foo">
+    <h1>Foo</h1>
+  </div>
+
+  <div data-path="/bar">
+    <h1>Bar</h1>
+  </div>
+
+  <div data-path="(.*)">
+    <h1>Not found</h1>
+  </div>
+</pathname-switch>
+```
+
 ## Prevent flash of undefined content
 
 ```html
 <style>
-*:not(:defined) {
+hash-switch:not(:defined),
+pathname-switch:not(:defined) {
   visibility: hidden;
 }
 </style>
