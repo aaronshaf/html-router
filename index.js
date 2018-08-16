@@ -2,6 +2,9 @@ import pathToRegexp from "./vendor/path-to-regexp/index.js";
 
 const isElement = node => node.nodeType === Node.ELEMENT_NODE;
 
+const isCustomElement = node =>
+  node.tagName != null && node.tagName.includes("-");
+
 const isRouteNode = node => node.hasAttribute("data-path");
 
 export class Switch extends HTMLElement {
@@ -31,15 +34,13 @@ export class Switch extends HTMLElement {
       const match = re.exec(pathname);
       const params = getParams(keys, match);
 
-      if (match && matchFound === false) {
+      if (match != null && matchFound === false) {
         matchFound = true;
         await Promise.all(
           Array.from(node.childNodes)
-            .filter(isElement)
+            .filter(isCustomElement)
             .map(async node => {
-              if (node.tagName.includes("-")) {
-                await customElements.whenDefined(node.tagName.toLowerCase());
-              }
+              await customElements.whenDefined(node.tagName.toLowerCase());
               node.match = {
                 url: pathname,
                 path,
@@ -79,11 +80,9 @@ export class Route extends HTMLElement {
     if (match) {
       await Promise.all(
         Array.from(this.childNodes)
-          .filter(isElement)
+          .filter(isCustomElement)
           .map(async node => {
-            if (node.tagName.includes("-")) {
-              await customElements.whenDefined(node.tagName.toLowerCase());
-            }
+            await customElements.whenDefined(node.tagName.toLowerCase());
             node.match = {
               url: pathname,
               path,
