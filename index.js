@@ -1,7 +1,8 @@
 import pathToRegexp from "./vendor/path-to-regexp/index.js";
 
-const isRouteNode = node =>
-  node.nodeType === Node.ELEMENT_NODE && node.hasAttribute("data-path");
+const isElement = node => node.nodeType === Node.ELEMENT_NODE;
+
+const isRouteNode = node => node.hasAttribute("data-path");
 
 export class Switch extends HTMLElement {
   constructor() {
@@ -19,15 +20,33 @@ export class Switch extends HTMLElement {
     }
     let matchFound = false;
 
-    const routeNodes = Array.from(this.childNodes).filter(isRouteNode);
+    const routeNodes = Array.from(this.childNodes)
+      .filter(isElement)
+      .filter(isRouteNode);
 
-    routeNodes.forEach(node => {
+    routeNodes.forEach(async node => {
       const path = node.dataset.path;
-      const re = pathToRegexp(path);
-      const result = re.exec(pathname);
+      const keys = [];
+      const re = pathToRegexp(path, keys);
+      const match = re.exec(pathname);
+      const params = getParams(keys, match);
 
-      if (result && matchFound === false) {
+      if (match && matchFound === false) {
         matchFound = true;
+        await Promise.all(
+          Array.from(node.childNodes)
+            .filter(isElement)
+            .map(async node => {
+              if (node.tagName.includes("-")) {
+                await customElements.whenDefined(node.tagName.toLowerCase());
+              }
+              node.match = {
+                url: pathname,
+                path,
+                params
+              };
+            })
+        );
         node.setAttribute("slot", "matched");
       } else {
         node.removeAttribute("slot");
@@ -46,19 +65,44 @@ export class Route extends HTMLElement {
     this.updateMatch = this.updateMatch.bind(this);
   }
 
-  updateMatch(pathname) {
+  async updateMatch(pathname) {
     if (pathname === "") {
       pathname = "/";
     }
 
     const path = this.getAttribute("path");
-    const re = pathToRegexp(path);
-    const result = re.exec(pathname);
+    const keys = [];
+    const re = pathToRegexp(path, keys);
+    const match = re.exec(pathname);
+    const params = getParams(keys, match);
 
-    if (result) {
+    if (match) {
+      await Promise.all(
+        Array.from(this.childNodes)
+          .filter(isElement)
+          .map(async node => {
+            if (node.tagName.includes("-")) {
+              await customElements.whenDefined(node.tagName.toLowerCase());
+            }
+            node.match = {
+              url: pathname,
+              path,
+              params
+            };
+          })
+      );
       this.shadowRoot.firstChild.removeAttribute("name");
     } else {
       this.shadowRoot.firstChild.setAttribute("name", "unmatched");
     }
   }
+}
+
+function getParams(keys, match) {
+  return match == null
+    ? {}
+    : match.slice(1).reduce((params, value, index) => {
+        params[keys[index].name] = value;
+        return params;
+      }, {});
 }
