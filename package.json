@@ -7,7 +7,7 @@
     "hash.js",
     "vendor/path-to-regexp/index.js"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": {
     "type": "git",
