@@ -119,6 +119,10 @@ Drop-in router.
 </pathname-route>
 ```
 
+## Access match params
+
+Custom elements that are children of a route or switch can access match data at `this.match`.
+
 ## Prevent flash of undefined content
 
 ```html
