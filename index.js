@@ -58,6 +58,7 @@ export class Switch extends HTMLElement {
 
         await Promise.all(
           Array.from(node.childNodes)
+            .concat(this.importedNodes)
             .filter(isCustomElement)
             .map(async node => {
               await customElements.whenDefined(node.tagName.toLowerCase());
@@ -119,6 +120,7 @@ export class Route extends HTMLElement {
 
       await Promise.all(
         Array.from(this.childNodes)
+          .concat(this.importedNodes)
           .filter(isCustomElement)
           .map(async node => {
             await customElements.whenDefined(node.tagName.toLowerCase());
