@@ -20,17 +20,17 @@ Drop-in router.
 
 ```html
 <hash-switch>
-  <div data-path="/foo">
+  <template data-path="/foo">
     <h1>Foo</h1>
-  </div>
+  </template>
 
-  <div data-path="/bar">
+  <template data-path="/bar">
     <h1>Bar</h1>
-  </div>
+  </template>
 
-  <div data-path="(.*)">
+  <template data-path="(.*)">
     <h1>Not found</h1>
-  </div>
+  </template>
 </hash-switch>
 ```
 
@@ -82,17 +82,17 @@ Drop-in router.
 
 ```html
 <pathname-switch>
-  <div data-path="/foo">
+  <template data-path="/foo">
     <h1>Foo</h1>
-  </div>
+  </template>
 
-  <div data-path="/bar">
+  <template data-path="/bar">
     <h1>Bar</h1>
-  </div>
+  </template>
 
-  <div data-path="(.*)">
+  <template data-path="(.*)">
     <h1>Not found</h1>
-  </div>
+  </template>
 </pathname-switch>
 ```
 

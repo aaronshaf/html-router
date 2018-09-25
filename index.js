@@ -17,6 +17,8 @@ export class Switch extends HTMLElement {
     const node = document.createElement("slot");
     node.setAttribute("name", "matched");
     shadowRoot.appendChild(node);
+    this.lastPathname = null;
+    this.importedNodes = [];
     this.updateMatch = this.updateMatch.bind(this);
   }
 
@@ -30,6 +32,11 @@ export class Switch extends HTMLElement {
       .filter(isElement)
       .filter(isRouteNode);
 
+    if (pathname !== this.lastPathname) {
+      this.importedNodes.forEach(node => node.remove());
+      this.importedNodes = [];
+    }
+
     routeNodes.forEach(async node => {
       const path = node.dataset.path;
       const keys = [];
@@ -39,6 +46,16 @@ export class Switch extends HTMLElement {
 
       if (match != null && matchFound === false) {
         matchFound = true;
+
+        if (isTemplateElement(node) && pathname !== this.lastPathname) {
+          const clone = document.importNode(node.content, true);
+          Array.from(clone.children).forEach(node =>
+            node.setAttribute("slot", "matched")
+          );
+          this.importedNodes.push(...clone.children);
+          insertAfter(clone, node);
+        }
+
         await Promise.all(
           Array.from(node.childNodes)
             .filter(isCustomElement)
@@ -51,11 +68,15 @@ export class Switch extends HTMLElement {
               };
             })
         );
-        node.setAttribute("slot", "matched");
+        if (isTemplateElement(node) == false) {
+          node.setAttribute("slot", "matched");
+        }
       } else {
         node.removeAttribute("slot");
       }
     });
+
+    this.lastPathname = pathname;
   }
 }
 
