@@ -5,6 +5,9 @@ const isElement = node => node.nodeType === Node.ELEMENT_NODE;
 const isCustomElement = node =>
   node.tagName != null && node.tagName.includes("-");
 
+const isTemplateElement = node =>
+  node.tagName != null && node.tagName.toUpperCase() === "TEMPLATE";
+
 const isRouteNode = node => node.hasAttribute("data-path");
 
 export class Switch extends HTMLElement {
@@ -59,11 +62,13 @@ export class Switch extends HTMLElement {
 export class Route extends HTMLElement {
   constructor() {
     super();
+    this.importedNodes = [];
     const shadowRoot = this.attachShadow({ mode: "open" });
     const node = document.createElement("slot");
     node.setAttribute("name", "unmatched");
     shadowRoot.appendChild(node);
     this.updateMatch = this.updateMatch.bind(this);
+    this.isMatched = false;
   }
 
   async updateMatch(pathname) {
@@ -76,8 +81,21 @@ export class Route extends HTMLElement {
     const re = pathToRegexp(path, keys);
     const match = re.exec(pathname);
     const params = getParams(keys, match);
+    const isMatched = match != null;
+    if (this.isMatched === isMatched) {
+      return;
+    }
+    this.isMatched = isMatched;
 
-    if (match) {
+    if (this.isMatched) {
+      Array.from(this.childNodes)
+        .filter(isTemplateElement)
+        .forEach(templateNode => {
+          const clone = document.importNode(templateNode.content, true);
+          this.importedNodes.push(...clone.children);
+          insertAfter(clone, templateNode);
+        });
+
       await Promise.all(
         Array.from(this.childNodes)
           .filter(isCustomElement)
@@ -92,6 +110,8 @@ export class Route extends HTMLElement {
       );
       this.shadowRoot.firstChild.removeAttribute("name");
     } else {
+      this.importedNodes.forEach(node => node.remove());
+      this.importedNodes = [];
       this.shadowRoot.firstChild.setAttribute("name", "unmatched");
     }
   }
@@ -104,4 +124,8 @@ function getParams(keys, match) {
         params[keys[index].name] = value;
         return params;
       }, {});
+}
+
+function insertAfter(node, antecedent) {
+  return antecedent.parentNode.insertBefore(node, antecedent.nextSibling);
 }
