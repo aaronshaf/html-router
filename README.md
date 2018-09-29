@@ -139,3 +139,7 @@ pathname-switch:not(:defined) {
 ```html
 <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2/webcomponents-loader.js"></script>
 ```
+
+## See also
+
+* [element-router](https://github.com/filipbech/element-router)
